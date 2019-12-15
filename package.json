@@ -1,21 +1,19 @@
 {
-  "name": "nifty-scrapper",
+  "name": "nse-scrapper",
   "version": "0.0.1",
   "description": "A simple scrapper to nse-site.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "export PORT=8080; node server.js",
+    "start-watch": "export PORT=8080; nodemon server.js"
   },
   "dependencies": {
     "express": "^4.16.4",
     "cheerio": "^0.22.0",
     "axios": "^0.19.0"
   },
-  "engines": {
-    "node": "8.x"
-  },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
+    "url": "https://github.com/astriskit/sturdy-carnival"
   },
   "license": "MIT",
   "keywords": [
