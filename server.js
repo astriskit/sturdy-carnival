@@ -1,6 +1,7 @@
 const express = require("express");
 const getInfo = require("./getInfo");
 const getActions = require("./getActions");
+const getAnnounces = require("./getAnnounces");
 const app = express();
 
 app.get("/api/search", async function(request, response) {
@@ -9,7 +10,11 @@ app.get("/api/search", async function(request, response) {
     if (!symbol) throw new Error("No symbol found!");
     let info = await getInfo(symbol);
     let actions = await getActions(symbol);
-    return response.json({ success: true, data: { info, actions } });
+    let announcements = await getAnnounces(symbol);
+    return response.json({
+      success: true,
+      data: { info, actions, announcements }
+    });
   } catch (err) {
     return response.json({ message: err.message, success: false });
   }
