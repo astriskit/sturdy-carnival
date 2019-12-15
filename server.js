@@ -22,6 +22,6 @@ app.get("/api/search", async function(request, response) {
 
 app.get("/", (_, res) => res.json({ online: true }));
 
-const listener = app.listen(process.env.PORT, function() {
+const listener = app.listen(process.env.PORT || 5000, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });

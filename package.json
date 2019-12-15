@@ -4,8 +4,8 @@
   "description": "A simple scrapper to nse-site.",
   "main": "server.js",
   "scripts": {
-    "start": "export PORT=8080; node server.js",
-    "start-watch": "export PORT=8080; nodemon server.js"
+    "start": "node server.js",
+    "start-watch": "nodemon server.js"
   },
   "dependencies": {
     "express": "^4.16.4",
