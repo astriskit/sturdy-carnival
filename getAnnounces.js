@@ -24,7 +24,7 @@ const getAnnounces = symbol => {
           );
         return info;
       } else {
-        return "No data found!";
+        return null;
       }
     });
 };

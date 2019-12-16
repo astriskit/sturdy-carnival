@@ -32,7 +32,7 @@ const getActions = symbol => {
         }).filter(Boolean);
         return info;
       } else {
-        return "No data found!";
+        return null;
       }
     });
 };
