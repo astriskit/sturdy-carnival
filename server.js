@@ -7,6 +7,8 @@ const app = express();
 
 app.use(cors({}));
 
+app.use("/", express.static("public"));
+
 app.get("/api/search", async function(request, response) {
   try {
     let { symbol } = request.query;
@@ -22,8 +24,6 @@ app.get("/api/search", async function(request, response) {
     return response.json({ message: err.message, success: false });
   }
 });
-
-app.get("/", (_, res) => res.json({ online: true }));
 
 const listener = app.listen(process.env.PORT || 5000, function() {
   console.log("Your app is listening on port " + listener.address().port);

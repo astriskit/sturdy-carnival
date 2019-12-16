@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+</style>
+
+<div id="app">
+  <div id="search">
+    <input type="text" id="symbol" placeholder="Symbol" />
+    <button @click="handleSearch">Search</button>
+  </div>
+
+  <div v-if="currentSymbol">You have searched for - {{ currentSymbol }}</div>
+  <div v-else>Type in symbol to search.</div>
+
+  <div v-if="loading" id="loader">Searching for the data</div>
+
+  <div>
+    <section v-if="!loading">
+      <h3>Company-Info</h3>
+      <div v-if="Array.isArray(companyInfo)">
+        <ul>
+          <li v-for="item in companyInfo">
+            {{ item.attrib }} - {{ item.value }}
+          </li>
+        </ul>
+      </div>
+      <div v-else-if="companyInfo">
+        {{ companyInfo }}
+      </div>
+      <div v-else>
+        Nil.
+      </div>
+    </section>
+
+    <section v-if="!loading">
+      <h3>Announcements</h3>
+      <div v-if="Array.isArray(announceInfo)">
+        <ul>
+          <li v-for="item in announceInfo">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
+      <div v-else-if="announceInfo">
+        {{ companyInfo }}
+      </div>
+      <div v-else>
+        Nil.
+      </div>
+    </section>
+
+    <section v-if="!loading">
+      <h3>Actions</h3>
+      <div v-if="Array.isArray(actionsInfo)">
+        <ul>
+          <li v-for="action in actionsInfo">
+            {{ action.exDate }} : {{action.purpose}}
+          </li>
+        </ul>
+      </div>
+      <div v-else-if="actionsInfo">{{ actionsInfo }}</div>
+      <div v-else>
+        Nil.
+      </div>
+    </section>
+  </div>
+
+  <div v-if="error">{{ error }}</div>
+</div>
+
+<script>
+  const app = new Vue({
+    el: "#app",
+    data: {
+      companyInfo: null,
+      announceInfo: null,
+      actionsInfo: null,
+      loading: false,
+      error: null,
+      currentSymbol: null
+    },
+    methods: {
+      handleSearch() {
+        const symbol = document.getElementById("symbol").value;
+        if (!symbol) {
+          alert("Please type the symbol first!");
+          return;
+        }
+        this.currentSymbol = symbol;
+        const api = `http://localhost:5000/api/search?symbol=${symbol}`;
+        this.loading = true;
+        axios
+          .get(api)
+          .then(
+            ({
+              data: {
+                data: { info, announcements, actions },
+                success
+              }
+            }) => {
+              if (success) {
+                this.companyInfo = info;
+                this.announceInfo = announcements;
+                this.actionsInfo = actions;
+              } else {
+                throw new Error(data);
+              }
+            }
+          )
+          .catch(err => {
+            this.error = err.message || "Couldn't load the data!";
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      }
+    }
+  });
+</script>
+
+<style>
+  #app {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    font-size: large;
+    font-family: "Roboto", sans-serif;
+  }
+  #app li:nth-child(odd) {
+    background-color: grey;
+    color: honeydew;
+  }
+  #app li:nth-child(even) {
+    background-color: lavender;
+    color: black;
+  }
+  #app h3 {
+    text-decoration: underline;
+  }
+  #search {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  #search input {
+    border: none;
+    border-bottom: solid 1px grey;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  #search button {
+    border-radius: 4px;
+  }
+</style>
