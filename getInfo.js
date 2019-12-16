@@ -9,7 +9,7 @@ const getInfo = symbol => {
       `https://www1.nseindia.com/marketinfo/companyTracker/compInfo.jsp?symbol=${symbol}&series=EQ`
     )
     .then(({ data }) => {
-      console.log("info--", data);
+      // console.log("info--", data);
       if (data.includes("Nil")) return null;
       return cheerio.load(data);
     })
