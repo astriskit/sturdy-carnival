@@ -17,14 +17,15 @@ const getInfo = symbol => {
       if ($) {
         return extractData($, (i, el) => {
           if (i === 0) {
-            return { Name: cleanStr($(el).text()) };
+            return { attrib: "Name", value: cleanStr($(el).text()) };
           } else {
             let iob = {};
             let texts = $(el)
               .text()
               .split(":");
             if (texts.length >= 2) {
-              iob[cleanStr(texts[0])] = cleanStr(texts.slice(1).join(":"));
+              iob["attrib"] = cleanStr(texts[0]);
+              iob["value"] = cleanStr(texts.slice(1).join(":"));
             } else {
               iob = null;
             }

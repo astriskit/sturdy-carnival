@@ -21,8 +21,10 @@ const getActions = symbol => {
             .text()
             .split(":");
           if (cells.length >= 2) {
-            let iOb = {};
-            iOb[cleanStr(cells[0])] = cleanStr(cells.slice(1).join(":"));
+            let iOb = {
+              exDate: cleanStr(cells[0]),
+              purpose: cleanStr(cells.slice(1).join(":"))
+            };
             return iOb;
           } else {
             return null;
