@@ -1,8 +1,11 @@
 const express = require("express");
+const cors = require("cors-express");
 const getInfo = require("./getInfo");
 const getActions = require("./getActions");
 const getAnnounces = require("./getAnnounces");
 const app = express();
+
+app.use(cors({}));
 
 app.get("/api/search", async function(request, response) {
   try {

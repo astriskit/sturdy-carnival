@@ -8,9 +8,10 @@
     "start-watch": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.16.4",
+    "axios": "^0.19.0",
     "cheerio": "^0.22.0",
-    "axios": "^0.19.0"
+    "cors-express": "^0.2.2",
+    "express": "^4.16.4"
   },
   "repository": {
     "url": "https://github.com/astriskit/sturdy-carnival"
