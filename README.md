@@ -14,7 +14,7 @@ A simple full-stack using vue and node-js/express to scrap "symbol's" data from 
 
 1. Clone the repo to the local.
 2. Run `npm install` to install the dependencies.
-3. Run `npm start` to start the server at port-8080; or run `npm run start-watch`, if `nodemon` is installed in scope for "watch" mode server.
+3. Run `npm start` to start the server at port:5000; or run `npm run start-watch`, if `nodemon` is installed in scope for "watch" mode server.
 4. Go to `http://localhost:5000` in your browser (Chrome-78.0.3904.108 tested). If you have changed the port, change the address aptly.
 5. On the loaded page - type in the symbol you want to search such as `INFY` and hit `search`.
 6. In sometime, the backend should return with results.
